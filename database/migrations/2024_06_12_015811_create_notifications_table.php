@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->string('titulo');
+            $table->text('descripcion');
+            $table->foreignId('flight_id')->constrained()->onDelete('cascade');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->timestamps();
         });
     }
