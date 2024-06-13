@@ -10,4 +10,9 @@ class NotificationController extends Controller
     {
         return view('admin.notification.home');
     }
+
+    public function create()
+    {
+        return view('admin.notification.create');
+    }
 }
