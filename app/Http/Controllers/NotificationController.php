@@ -36,4 +36,21 @@ class NotificationController extends Controller
             return redirect(route('admin.notifications/create'));
         }
     }
+    public function edit($id)
+    {
+        $notifications = Notification::findOrFail($id);
+        return view('admin.notification.update', compact('notifications'));
+    }
+ 
+    public function delete($id)
+    {
+        $notifications = Notification::findOrFail($id)->delete();
+        if ($notifications) {
+            session()->flash('success', 'Notification Deleted Successfully');
+            return redirect(route('admin/notifications'));
+        } else {
+            session()->flash('error', 'Notification Not Delete successfully');
+            return redirect(route('admin/notifications/create'));
+        }
+    }
 }

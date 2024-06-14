@@ -40,8 +40,8 @@
                                 <td class="align-middle">{{ $notification->end_date }}</td>
                                 <td class="align-middle">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <a href="{{ route('admin/notifications/create', ['id'=>$notification->id]) }}" type="button" class="btn btn-secondary">Edit</a>
-                                        <a href="{{ route('admin/notifications/create', ['id'=>$notification->id]) }}" type="button" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('admin/notifications/edit', ['id'=>$notification->id]) }}" type="button" class="btn btn-secondary">Edit</a>
+                                        <a href="{{ route('admin/notifications/delete', ['id'=>$notification->id]) }}" type="button" class="btn btn-danger">Delete</a>
                                     </div>
                                 </td>
                             </tr>

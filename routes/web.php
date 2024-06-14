@@ -18,11 +18,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [HomeController::class, 'index']);
     Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin/notifications');
     Route::get('/admin/notifications/create', [NotificationController::class,'create'])->name('admin/notifications/create');
     Route::post('/admin/notifications/save', [NotificationController::class,'save'])->name('admin/notifications/save');
+    Route::get('/admin/notifications/edit/{id}', [NotificationController::class, 'edit'])->name('admin/notifications/edit');
+    Route::put('/admin/notifications/edit/{id}', [NotificationController::class, 'update'])->name('admin/notifications/update');
+    Route::get('/admin/notifications/delete/{id}', [NotificationController::class, 'delete'])->name('admin/notifications/delete');
 });
 require __DIR__.'/auth.php';
 
