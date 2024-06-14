@@ -11,14 +11,22 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in as Admin!") }}
                     <h1 class="mb-0">Crear nueva notificacion</h1>
-                    <hr>
+
+                    <hr />
+                    @if (session()->has('error'))
+                    <div>
+                        {{session('error')}}
+                    </div>
+                    @endif
+
                     <p><a href="{{ route('admin/notifications') }} " class="btn btn-primary">Retroceder</a></p>
-                    <form>
+                    
+                    <form action="{{ route('admin/notifications/save') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="text" name="titulo" class="form-control" placeholder="TITULO">
-                                @error('title')
+                                @error('titulo')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
@@ -26,7 +34,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="text" name="descripcion" class="form-control" placeholder="DESCRIPCION">
-                                @error('category')
+                                @error('descripcion')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
@@ -34,7 +42,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="number" name="flight_id" class="form-control" placeholder="ID DE VUELO">
-                                @error('price')
+                                @error('flight_id')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
@@ -42,7 +50,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="date" name="start_date" class="form-control" placeholder="FECHA DE INICIO">
-                                @error('price')
+                                @error('start_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
@@ -50,7 +58,7 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <input type="date" name="end_date" class="form-control" placeholder="FECHA DE EXPIRACION">
-                                @error('price')
+                                @error('end_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
