@@ -49,7 +49,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="date" name="start_date" class="form-control" placeholder="FECHA DE INICIO">
+                                <input type="datetime-local" name="start_date" class="form-control" placeholder="FECHA DE INICIO">
                                 @error('start_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -57,7 +57,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="date" name="end_date" class="form-control" placeholder="FECHA DE EXPIRACION">
+                                <input type="datetime-local" name="end_date" class="form-control" placeholder="FECHA DE EXPIRACION">
                                 @error('end_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

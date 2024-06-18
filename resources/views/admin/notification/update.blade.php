@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col mb-3">
                                 <label class="form-label">Fecha de Inicio</label>
-                                <input type="date" name="start_date" class="form-control" placeholder="Fecha de Inicio" value="{{ $notifications->start_date }}">
+                                <input type="datetime-local" name="start_date" class="form-control" placeholder="Fecha de Inicio" value="{{ $notifications->start_date }}">
                                 @error('start_date')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col mb-3">
                                 <label class="form-label">Fecha de Término</label>
-                                <input type="date" name="end_date" class="form-control" placeholder="Fecha de Término" value="{{ $notifications->end_date }}">
+                                <input type="datetime-local" name="end_date" class="form-control" placeholder="Fecha de Término" value="{{ $notifications->end_date }}">
                                 @error('end_date')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
