@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/dashboard', [HomeController::class, 'index']);
+    Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin/dashboard');
     Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin/notifications');
     Route::get('/admin/notifications/create', [NotificationController::class,'create'])->name('admin/notifications/create');
     Route::post('/admin/notifications/save', [NotificationController::class,'save'])->name('admin/notifications/save');

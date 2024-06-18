@@ -33,7 +33,7 @@ class NotificationController extends Controller
             return redirect(route('admin/notifications'));
         } else {
             session()->flash('error', 'Aqui hay gato encerrado');
-            return redirect(route('admin.notifications/create'));
+            return redirect(route('admin/notifications/create'));
         }
     }
     public function edit($id)
@@ -51,6 +51,32 @@ class NotificationController extends Controller
         } else {
             session()->flash('error', 'Notification Not Delete successfully');
             return redirect(route('admin/notifications/create'));
+        }
+    }
+    public function update(Request $request, $id)
+    {
+        $notification = Notification::findOrFail($id);
+        
+        $titulo = $request->titulo;
+        $descripcion = $request->descripcion;
+        $flight_id = $request->flight_id;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $notification->titulo = $titulo;
+        $notification->descripcion = $descripcion;
+        $notification->flight_id = $flight_id;
+        $notification->start_date = $start_date;
+        $notification->end_date = $end_date;
+
+        $data = $notification->save();
+        
+        if ($data) {
+            session()->flash('success', 'Notificación actualizada correctamente');
+            return redirect()->route('admin/notifications');
+        } else {
+            session()->flash('error', 'Ocurrió algún problema');
+            return redirect()->route('admin/notifications/edit', $id);
         }
     }
 }

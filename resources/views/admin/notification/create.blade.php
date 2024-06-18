@@ -25,7 +25,7 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" name="titulo" class="form-control" placeholder="TITULO">
+                                <input type="text" name="titulo" class="form-control" placeholder="Ingrese el titulo">
                                 @error('titulo')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
