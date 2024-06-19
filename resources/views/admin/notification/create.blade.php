@@ -25,7 +25,7 @@
                         @csrf
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" name="titulo" class="form-control" placeholder="Ingrese el titulo">
+                                <input type="text" name="titulo" class="form-control" placeholder="Ingrese el titulo" value="{{ old('titulo') }}">
                                 @error('titulo')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -33,7 +33,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" name="descripcion" class="form-control" placeholder="DESCRIPCION">
+                                <input type="text" name="descripcion" class="form-control" placeholder="DESCRIPCION" value="{{ old('descripcion') }}">
                                 @error('descripcion')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="number" name="flight_id" class="form-control" placeholder="ID DE VUELO">
+                                <input type="number" name="flight_id" class="form-control" placeholder="ID DE VUELO" value="{{ old('flight_id') }}">
                                 @error('flight_id')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -49,7 +49,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="datetime-local" name="start_date" class="form-control" placeholder="FECHA DE INICIO">
+                                <input type="datetime-local" name="start_date" class="form-control" placeholder="FECHA DE INICIO" value="{{ old('start_date') }}">
                                 @error('start_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -57,7 +57,7 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="datetime-local" name="end_date" class="form-control" placeholder="FECHA DE EXPIRACION">
+                                <input type="datetime-local" name="end_date" class="form-control" placeholder="FECHA DE EXPIRACION" value="{{ old('end_date') }}">
                                 @error('end_date')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror

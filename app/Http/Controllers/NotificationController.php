@@ -23,7 +23,7 @@ class NotificationController extends Controller
         $validation = $request->validate([
             'titulo' => 'required',
             'descripcion' => 'required',
-            'flight_id' => 'required',
+            'flight_id' => ['required', 'integer', 'exists:flights,id'],
             'start_date'=> 'required',
             'end_date'=> 'required',
         ]);
@@ -39,7 +39,7 @@ class NotificationController extends Controller
     public function edit($id)
     {
         $notifications = Notification::findOrFail($id);
-        return view('admin.notification.update', compact('notifications'));
+        return view('admin/notification/update', compact('notifications'));
     }
  
     public function delete($id)
@@ -55,26 +55,24 @@ class NotificationController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $notification = Notification::findOrFail($id);
-        
-        $titulo = $request->titulo;
-        $descripcion = $request->descripcion;
-        $flight_id = $request->flight_id;
-        $start_date = $request->start_date;
-        $end_date = $request->end_date;
-
-        $notification->titulo = $titulo;
-        $notification->descripcion = $descripcion;
-        $notification->flight_id = $flight_id;
-        $notification->start_date = $start_date;
-        $notification->end_date = $end_date;
-
-        $data = $notification->save();
-        
-        if ($data) {
+        try {
+            $notification = Notification::findOrFail($id);
+    
+            $validation = $request->validate([
+                'titulo' => 'required',
+                'descripcion' => 'required',
+                'flight_id' => ['required', 'integer', 'exists:flights,id'],
+                'start_date' => 'required|date',
+                'end_date' => 'required|date|after:start_date',
+            ]);
+    
+            $notification->update($validation);
+    
             session()->flash('success', 'Notificación actualizada correctamente');
-            return redirect()->route('admin/notifications');
-        } else {
+            return redirect()->route('admin.notifications.index');
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return redirect()->back()->withErrors($e->validator)->withInput();
+        } catch (\Exception $e) {
             session()->flash('error', 'Ocurrió algún problema');
             return redirect()->route('admin/notifications/edit', $id);
         }
