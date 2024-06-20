@@ -25,5 +25,9 @@ class Flight extends Model
     {
         return $this->belongsTo(Route::class);
     }
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 
 }

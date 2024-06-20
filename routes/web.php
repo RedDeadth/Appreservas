@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/flights/index', [FlightController::class, 'index'])->name('flights.index');
     Route::get('/flights', [FlightController::class, 'index'])->name('flights.index');
     Route::get('/reservations/create/{flight}', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

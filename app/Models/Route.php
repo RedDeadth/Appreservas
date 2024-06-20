@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +8,7 @@ class Route extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        // Otros campos si los tienes
-    ];
+    protected $fillable = ['origin', 'destination'];
 
     public function flights()
     {

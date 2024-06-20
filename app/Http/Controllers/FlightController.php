@@ -8,10 +8,7 @@ class FlightController extends Controller
 {
     public function index()
     {
-        // Obtener todos los vuelos
-        $flights = Flight::all();
-        
-        // Pasar los vuelos a la vista
+        $flights = Flight::with('airline', 'route')->get();
         return view('flights.index', compact('flights'));
     }
 }
