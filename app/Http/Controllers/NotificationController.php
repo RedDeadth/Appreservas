@@ -69,7 +69,7 @@ class NotificationController extends Controller
             $notification->update($validation);
     
             session()->flash('success', 'Notificación actualizada correctamente');
-            return redirect()->route('admin.notifications.index');
+            return redirect()->route('admin/notifications');
         } catch (\Illuminate\Validation\ValidationException $e) {
             return redirect()->back()->withErrors($e->validator)->withInput();
         } catch (\Exception $e) {

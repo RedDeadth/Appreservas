@@ -16,5 +16,14 @@ class Flight extends Model
         'arrival_date_time',
         'available_seats',
     ];
+    public function airline()
+    {
+        return $this->belongsTo(Airline::class);
+    }
+
+    public function route()
+    {
+        return $this->belongsTo(Route::class);
+    }
 
 }
