@@ -29,5 +29,13 @@ class Flight extends Model
     {
         return $this->hasMany(Reservation::class);
     }
-
+    public function getOccupiedSeats()
+    {
+        return $this->reservations->pluck('seat_number')->toArray();
+    }
+    public function getAvailableSeats()
+    {
+        $occupiedSeats = $this->getOccupiedSeats();
+        return $this->available_seats - count($occupiedSeats);
+    }
 }

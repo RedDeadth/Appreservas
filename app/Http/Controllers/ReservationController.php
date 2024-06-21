@@ -1,39 +1,46 @@
 <?php
 
+// app/Http/Controllers/ReservationController.php
+
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Flight;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 class ReservationController extends Controller
 {
-    public function create(Flight $flight)
+    public function create($flight_id)
     {
-        return view('reservations.create', compact('flight'));
+        $flight = Flight::findOrFail($flight_id);
+        $occupiedSeats = $flight->getOccupiedSeats();
+        $availableSeats = range(1, $flight->available_seats);
+        $availableSeats = array_diff($availableSeats, $occupiedSeats);
+
+        return view('reservations.create', compact('flight', 'availableSeats'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'flight_id' => 'required|exists:flights,id',
-            'seat_number' => 'required|string',
-            'status' => 'required|in:confirmed,pending,canceled',
+            'seat_number' => 'required|integer',
+            'status' => 'required|in:pending,confirmed,canceled',
         ]);
 
-        $reservation = Reservation::create([
-            'user_id' => Auth::id(),
+        $flight = Flight::findOrFail($request->flight_id);
+        if (in_array($request->seat_number, $flight->getOccupiedSeats())) {
+            return back()->withErrors(['seat_number' => 'El asiento seleccionado ya está ocupado.'])->withInput();
+        }
+
+        Reservation::create([
+            'user_id' => auth()->id(),
             'flight_id' => $request->flight_id,
             'seat_number' => $request->seat_number,
             'status' => $request->status,
         ]);
 
-        if ($reservation) {
-            session()->flash('success', 'Reserva realizada correctamente');
-            return redirect()->route('flights.index');
-        } else {
-            session()->flash('error', 'Ocurrió algún problema');
-            return redirect()->back();
-        }
+        session()->flash('success', 'Reserva creada con éxito');
+        return redirect()->route('flights.index');
     }
 }

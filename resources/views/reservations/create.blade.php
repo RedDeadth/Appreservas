@@ -1,3 +1,5 @@
+<!-- resources/views/reservations/create.blade.php -->
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -12,22 +14,10 @@
                     <h1 class="mb-4">Reservar Vuelo ID: {{ $flight->id }}</h1>
 
                     @if (session()->has('error'))
-                    <div>
-                        {{ session('error') }}
-                    </div>
-                    @endif
-
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Detalles del Vuelo</h5>
-                            <p class="card-text">Aerolínea: {{ $flight->airline->name }}</p>
-                            <p class="card-text">Origen: {{ $flight->route->origin }}</p>
-                            <p class="card-text">Destino: {{ $flight->route->destination }}</p>
-                            <p class="card-text">Fecha de Salida: {{ $flight->departure_date_time }}</p>
-                            <p class="card-text">Fecha de Llegada: {{ $flight->arrival_date_time }}</p>
-                            <p class="card-text">Asientos Disponibles: {{ $flight->available_seats }}</p>
+                        <div>
+                            {{ session('error') }}
                         </div>
-                    </div>
+                    @endif
 
                     <form action="{{ route('reservations.store') }}" method="post">
                         @csrf
@@ -35,9 +25,13 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <input type="text" name="seat_number" class="form-control" placeholder="Número de Asiento" required>
+                                <select name="seat_number" class="form-control" required>
+                                    @foreach($availableSeats as $seat)
+                                        <option value="{{ $seat }}">{{ $seat }}</option>
+                                    @endforeach
+                                </select>
                                 @error('seat_number')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -50,7 +44,7 @@
                                     <option value="canceled">Cancelado</option>
                                 </select>
                                 @error('status')
-                                <span class="text-danger">{{ $message }}</span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
