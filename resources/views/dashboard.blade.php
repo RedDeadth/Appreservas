@@ -9,10 +9,25 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("You're logged in as User!") }}
-                    <a href="{{ route('flights.index') }}" class="btn btn-primary">Ver Vuelos</a>
+                    <h1 class="mb-4">Vuelos Disponibles</h1>
 
-
+                    <div class="row row-cols-1 row-cols-md-4 g-4">
+                        @forelse($flights as $flight)
+                            <div class="col">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Vuelo ID: {{ $flight->id }}</h5>
+                                        <p class="card-text">Aerolínea: {{ $flight->airline->name }}</p>
+                                        <p class="card-text">Destino: {{ $flight->route->destination }}</p>
+                                        <p class="card-text">Asientos Disponibles: {{ $flight->available_seats }}</p>
+                                        <a href="{{ route('reservations.create', $flight->id) }}" class="btn btn-primary">Reservar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p>No hay vuelos disponibles.</p>
+                        @endforelse
+                    </div>
                 </div>
             </div>
         </div>
