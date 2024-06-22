@@ -29,7 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-flights', [ReservationController::class, 'myReservations'])->name('my-flights.index');
 
     Route::get('/payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
-
+    Route::get('/payment-methods/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
+    Route::post('/payment-methods', [PaymentMethodController::class, 'store'])->name('payment-methods.store');
+    Route::delete('/payment-methods/{id}', [PaymentMethodController::class, 'destroy'])->name('payment-methods.destroy');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {

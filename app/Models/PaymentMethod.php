@@ -3,18 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class PaymentMethod extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * Get the payment methods for the user.
-     */
-    public function paymentMethods()
+    protected $fillable = [
+        'user_id',
+        'name',
+        'card_number',
+        
+        'type',
+    ];
+
+    public function user()
     {
-        return $this->hasMany(PaymentMethod::class);
+        return $this->belongsTo(User::class);
     }
 }

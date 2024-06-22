@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('flight_id')->constrained('flights'); // Nombre de la tabla
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('flight_id')->constrained()->onDelete('cascade');
             $table->string('seat_number');
             $table->enum('status', ['confirmed', 'pending', 'canceled'])->default('pending');
+            $table->foreignId('payment_method_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
-        
     }
 
     /**

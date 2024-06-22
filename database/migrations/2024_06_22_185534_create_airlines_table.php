@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paymentmethods', function (Blueprint $table) {
+        Schema::create('airlines', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paymentmethods');
+        Schema::dropIfExists('airlinesphp');
     }
 };
