@@ -41,6 +41,63 @@ class ReservationController extends Controller
         ]);
 
         session()->flash('success', 'Reserva creada con éxito');
-        return redirect()->route('flights.index');
+        return redirect()->route('dashboard');
+    }
+    public function myReservations()
+    {
+        $user = auth()->user();
+        $reservations = Reservation::where('user_id', $user->id)->with('flight')->get();
+
+        return view('reservations.my_reservations', compact('reservations'));
+    }
+    public function edit($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $flight = $reservation->flight;
+        $availableSeats = range(1, $flight->available_seats);
+        $occupiedSeats = $flight->getOccupiedSeats();
+        $availableSeats = array_diff($availableSeats, $occupiedSeats);
+
+        return view('reservations.edit', compact('reservation', 'availableSeats'));
+    }
+
+    // Método para actualizar una reserva
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'seat_number' => 'required|integer',
+            'status' => 'required|in:pending,confirmed,canceled',
+        ]);
+
+        $reservation = Reservation::findOrFail($id);
+        $flight = $reservation->flight;
+
+        if (in_array($request->seat_number, $flight->getOccupiedSeats())) {
+            return back()->withErrors(['seat_number' => 'El asiento seleccionado ya está ocupado.'])->withInput();
+        }
+
+        $reservation->update([
+            'seat_number' => $request->seat_number,
+            'status' => $request->status,
+        ]);
+
+        session()->flash('success', 'Reserva actualizada con éxito');
+        return redirect()->route('my-flights.index');
+    }
+
+    // Método para eliminar una reserva
+    public function destroy($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        $reservation->delete();
+
+        session()->flash('success', 'Reserva eliminada con éxito');
+        return redirect()->route('my-flights.index');
+    }
+
+    public function index()
+    {
+        $reservations = auth()->user()->reservations()->with('flight.route', 'flight.airline')->get();
+        return view('my-flights.index', compact('reservations'));
     }
 }

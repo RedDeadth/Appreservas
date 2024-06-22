@@ -49,10 +49,10 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="status" class="form-label">Estado de la Reserva</label>
+                            <label for="status" class="form-label">Como desea dejar el pago de su reserva?</label>
                             <select name="status" class="form-control" required>
                                 <option value="pending">Pendiente</option>
-                                <option value="confirmed">Confirmado</option>
+                                <option value="confirmed">Confirmar</option>
                                 <option value="canceled">Cancelado</option>
                             </select>
                             @error('status')
