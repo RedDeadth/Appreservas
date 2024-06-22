@@ -1,5 +1,3 @@
-<!-- resources/views/reservations/create.blade.php -->
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -29,7 +27,7 @@
                         <p><strong>Fecha de Salida:</strong> {{ $flight->departure_date_time }}</p>
                         <p><strong>Fecha de Llegada:</strong> {{ $flight->arrival_date_time }}</p>
                         <p><strong>Duración del Vuelo:</strong> {{ $flight->duration }} horas</p>
-                        <p><strong>Asientos Disponibles:</strong> {{ $flight->available_seats }}</p>
+                        <p><strong>Asientos Totales:</strong> {{ $flight->available_seats }}</p>
                     </div>
 
                     <form action="{{ route('reservations.store') }}" method="post">
@@ -49,13 +47,26 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="status" class="form-label">Como desea dejar el pago de su reserva?</label>
+                            <label for="status" class="form-label">Estado de la Reserva</label>
                             <select name="status" class="form-control" required>
                                 <option value="pending">Pendiente</option>
                                 <option value="confirmed">Confirmar</option>
                                 <option value="canceled">Cancelado</option>
                             </select>
                             @error('status')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3" id="payment-method-section" style="display: none;">
+                            <label for="payment_method_id" class="form-label">Seleccionar Método de Pago</label>
+                            <select name="payment_method_id" class="form-control">
+                                <option value="">Seleccione un método de pago</option>
+                                @foreach($paymentMethods as $method)
+                                    <option value="{{ $method->id }}">{{ $method->name }} - {{ $method->card_number }}</option>
+                                @endforeach
+                            </select>
+                            @error('payment_method_id')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
@@ -68,4 +79,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const statusSelect = document.querySelector('select[name="status"]');
+            const paymentMethodSection = document.getElementById('payment-method-section');
+
+            statusSelect.addEventListener('change', function () {
+                if (this.value === 'confirmed') {
+                    paymentMethodSection.style.display = 'block';
+                } else {
+                    paymentMethodSection.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </x-app-layout>

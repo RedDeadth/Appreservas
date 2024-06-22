@@ -14,6 +14,7 @@ class Reservation extends Model
         'flight_id',
         'seat_number',
         'status',
+        'payment_method_id',
     ];
 
     public function flight()
@@ -24,5 +25,9 @@ class Reservation extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function paymentMethod()
+    {
+        return $this->belongsTo(PaymentMethod::class);
     }
 }

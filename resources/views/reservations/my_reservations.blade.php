@@ -29,7 +29,7 @@
                                                 <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger">Cancelar Reserva</button>
                                                 </form>
                                             </div>
                                         </li>

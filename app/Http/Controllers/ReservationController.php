@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Flight;
 use App\Models\Reservation;
+use Auth;
 
 class ReservationController extends Controller
 {
@@ -16,8 +17,9 @@ class ReservationController extends Controller
         $occupiedSeats = $flight->getOccupiedSeats();
         $availableSeats = range(1, $flight->available_seats);
         $availableSeats = array_diff($availableSeats, $occupiedSeats);
+        $paymentMethods = Auth::user()->paymentMethods;
 
-        return view('reservations.create', compact('flight', 'availableSeats'));
+        return view('reservations.create', compact('flight', 'availableSeats', 'paymentMethods'));
     }
 
     public function store(Request $request)
@@ -26,11 +28,15 @@ class ReservationController extends Controller
             'flight_id' => 'required|exists:flights,id',
             'seat_number' => 'required|integer',
             'status' => 'required|in:pending,confirmed,canceled',
+            'payment_method_id' => 'nullable|exists:payment_methods,id',
         ]);
 
         $flight = Flight::findOrFail($request->flight_id);
         if (in_array($request->seat_number, $flight->getOccupiedSeats())) {
             return back()->withErrors(['seat_number' => 'El asiento seleccionado ya está ocupado.'])->withInput();
+        }
+        if ($request->status == 'confirmed' && !$request->payment_method_id) {
+            return back()->withErrors(['payment_method_id' => 'Debe seleccionar un método de pago para confirmar la reserva.'])->withInput();
         }
 
         Reservation::create([
@@ -38,6 +44,7 @@ class ReservationController extends Controller
             'flight_id' => $request->flight_id,
             'seat_number' => $request->seat_number,
             'status' => $request->status,
+            'payment_method_id' => $request->payment_method_id,
         ]);
 
         session()->flash('success', 'Reserva creada con éxito');

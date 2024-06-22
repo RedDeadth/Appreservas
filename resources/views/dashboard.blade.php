@@ -6,9 +6,7 @@
             </h2>
             <div>
                 <a href="{{ route('my-flights.index') }}" class="btn btn-secondary">Mis Reservas</a>
-                
                 <a href="{{ route('payment-methods.index') }}" class="btn btn-secondary ml-2">Mis métodos de pago</a>
-                
             </div>
         </div>
     </x-slot>
@@ -22,9 +20,9 @@
                             <div class="col">
                                 <div class="card h-100">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $flight->route->destination }}</h5>
+                                        <h5 class="card-title">Destino: {{ $flight->route->destination }}</h5>
                                         <p class="card-text">Aerolínea: {{ $flight->airline->name }}</p>
-                                        <p class="card-text">Duración del vuelo: {{ $flight->duration }} horas</p>
+                                        <p class="card-text">Duración del vuelo: {{ $flight->duration }}</p>
                                         <p class="card-text">Asientos Disponibles: {{ $flight->available_seats }}</p>
                                         <a href="{{ route('reservations.create', $flight->id) }}" class="btn btn-danger w-full">Reservar</a>
                                     </div>

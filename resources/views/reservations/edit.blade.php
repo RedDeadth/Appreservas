@@ -25,18 +25,7 @@
                             @enderror
                         </div>
 
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Estado de la Reserva</label>
-                            <select name="status" class="form-control" required>
-                                <option value="pending" {{ $reservation->status == 'pending' ? 'selected' : '' }}>Pendiente</option>
-                                <option value="confirmed" {{ $reservation->status == 'confirmed' ? 'selected' : '' }}>Confirmado</option>
-                                <option value="canceled" {{ $reservation->status == 'canceled' ? 'selected' : '' }}>Cancelado</option>
-                            </select>
-                            @error('status')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
+                        
                         <div class="mb-3 text-center">
                             <button class="btn btn-primary w-full">Actualizar</button>
                         </div>
