@@ -36,7 +36,7 @@
                             <input type="datetime-local" name="arrival_date_time" id="arrival_date_time" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         </div>
                         <div class="mb-4">
-                            <label for="duration" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Duración (horas)</label>
+                            <label for="duration" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Precio del boleto</label>
                             <input type="number" name="duration" id="duration" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         </div>
                         <div class="mb-4">

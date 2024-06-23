@@ -6,17 +6,57 @@ use App\Models\Flight;
 use Illuminate\Http\Request;
 use App\Models\Airline;
 use App\Models\Route;
+use App\Models\Reservation;
+
 class HomeController extends Controller
 {
     public function index()
     {
         $flights = Flight::with('airline', 'route')->get();
-        return view('admin/dashboard', compact('flights'));
+
+        // Iterar sobre cada vuelo para calcular los asientos disponibles y la duración del vuelo
+        $flights->each(function ($flight) {
+            // Calcular la duración del vuelo en horas y minutos
+            $departureDateTime = new \DateTime($flight->departure_date_time);
+            $arrivalDateTime = new \DateTime($flight->arrival_date_time);
+            $duration = $departureDateTime->diff($arrivalDateTime);
+
+            // Calcular la duración total en minutos y luego convertirla a horas y minutos
+            $totalMinutes = $duration->days * 24 * 60;
+            $totalMinutes += $duration->h * 60;
+            $totalMinutes += $duration->i;
+
+            $hours = floor($totalMinutes / 60);
+            $minutes = $totalMinutes % 60;
+
+            // Formatear la duración del vuelo como HH:MM
+            $flight->duration = sprintf('%02d:%02d', $hours, $minutes);
+
+            // Contar la cantidad de reservas confirmadas para este vuelo
+            $confirmedReservationsCount = Reservation::where('flight_id', $flight->id)
+                ->where('status', 'confirmed')
+                ->count();
+
+            // Contar la cantidad total de reservas (confirmadas y pendientes)
+            $totalReservationsCount = Reservation::where('flight_id', $flight->id)
+                ->whereIn('status', ['confirmed', 'pending'])
+                ->count();
+
+            // Calcular los asientos disponibles restando las reservas confirmadas y pendientes
+            $availableSeats = $flight->available_seats - $totalReservationsCount;
+
+            // Actualizar el atributo calculado a cada vuelo
+            $flight->available_seats = max(0, $availableSeats); // Evitar asientos negativos
+        });
+
+        return view('admin.dashboard', compact('flights'));
     }
 
     public function create()
     {
-        return view('admin.flights.create');
+        $airlines = Airline::all();
+        $routes = Route::all();
+        return view('admin.flight.create', compact('airlines', 'routes'));
     }
 
     public function store(Request $request)
