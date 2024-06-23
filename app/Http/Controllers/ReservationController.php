@@ -73,7 +73,7 @@ class ReservationController extends Controller
     {
         $request->validate([
             'seat_number' => 'required|integer',
-            'status' => 'required|in:pending,confirmed,canceled',
+            
         ]);
 
         $reservation = Reservation::findOrFail($id);
@@ -85,7 +85,7 @@ class ReservationController extends Controller
 
         $reservation->update([
             'seat_number' => $request->seat_number,
-            'status' => $request->status,
+          
         ]);
 
         session()->flash('success', 'Reserva actualizada con éxito');

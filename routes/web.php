@@ -36,12 +36,14 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin/dashboard');
-    Route::get('/admin/notifications', [NotificationController::class, 'index'])->name('admin/notifications');
-    Route::get('/admin/notifications/create', [NotificationController::class,'create'])->name('admin/notifications/create');
-    Route::post('/admin/notifications/save', [NotificationController::class,'save'])->name('admin/notifications/save');
-    Route::get('/admin/notifications/edit/{id}', [NotificationController::class, 'edit'])->name('admin/notifications/edit');
-    Route::put('/admin/notifications/edit/{id}', [NotificationController::class, 'update'])->name('admin/notifications/update');
-    Route::get('/admin/notifications/delete/{id}', [NotificationController::class, 'delete'])->name('admin/notifications/delete');
+    Route::get('flights', [FlightController::class, 'index'])->name('admin.flights.index');
+    Route::get('flights/create', [FlightController::class, 'create'])->name('admin.flights.create');
+    Route::post('flights', [FlightController::class, 'store'])->name('admin.flights.store');
+    Route::get('flights/{flight}', [FlightController::class, 'show'])->name('admin.flights.show');
+    Route::get('flights/{flight}/edit', [FlightController::class, 'edit'])->name('admin.flights.edit');
+    Route::put('flights/{flight}', [FlightController::class, 'update'])->name('admin.flights.update');
+    Route::delete('flights/{flight}', [FlightController::class, 'destroy'])->name('admin.flights.destroy');
+    
 });
 require __DIR__.'/auth.php';
 
