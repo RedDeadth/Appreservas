@@ -17,4 +17,5 @@ class FlightController extends Controller
         
         return view('flights.index', compact('flights'));
     }
+    
 }

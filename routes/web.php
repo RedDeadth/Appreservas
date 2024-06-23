@@ -36,14 +36,12 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin/dashboard');
-    Route::get('flights', [FlightController::class, 'index'])->name('admin.flights.index');
-    Route::get('flights/create', [FlightController::class, 'create'])->name('admin.flights.create');
-    Route::post('flights', [FlightController::class, 'store'])->name('admin.flights.store');
-    Route::get('flights/{flight}', [FlightController::class, 'show'])->name('admin.flights.show');
-    Route::get('flights/{flight}/edit', [FlightController::class, 'edit'])->name('admin.flights.edit');
-    Route::put('flights/{flight}', [FlightController::class, 'update'])->name('admin.flights.update');
-    Route::delete('flights/{flight}', [FlightController::class, 'destroy'])->name('admin.flights.destroy');
     
+    Route::get('admin/flights/create', [HomeController::class, 'create'])->name('admin.flights.create');   // Formulario para crear vuelo
+    Route::post('admin/flights', [HomeController::class, 'store'])->name('admin.flights.store');      // Guardar vuelo
+    Route::get('admin/flights/{flight}/edit', [HomeController::class, 'edit'])->name('admin.flights.edit');    // Formulario para editar vuelo
+    Route::put('admin/flights/{flight}', [HomeController::class, 'update'])->name('admin.flights.update');  // Actualizar vuelo
+    Route::delete('admin/flights/{flight}', [HomeController::class, 'destroy'])->name('admin.flights.destroy');
 });
 require __DIR__.'/auth.php';
 
