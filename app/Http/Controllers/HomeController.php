@@ -76,6 +76,7 @@ class HomeController extends Controller
             ->with('success', 'Vuelo creado correctamente.');
     }
 
+    
     public function edit($id)
     {
         $flight = Flight::findOrFail($id);
