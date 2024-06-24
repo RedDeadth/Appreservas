@@ -13,6 +13,7 @@ class HomeController extends Controller
     public function index()
     {
         $flights = Flight::with('airline', 'route')->get();
+        $airlines = Airline::all();
 
         // Iterar sobre cada vuelo para calcular los asientos disponibles y la duración del vuelo
         $flights->each(function ($flight) {

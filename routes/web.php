@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/flights/{flight}/edit', [HomeController::class, 'edit'])->name('admin.flights.edit');    // Formulario para editar vuelo
     Route::put('admin/flights/{flight}', [HomeController::class, 'update'])->name('admin.flights.update');  // Actualizar vuelo
     Route::delete('admin/flights/{flight}', [HomeController::class, 'destroy'])->name('admin.flights.destroy');
+
 });
 require __DIR__.'/auth.php';
 
