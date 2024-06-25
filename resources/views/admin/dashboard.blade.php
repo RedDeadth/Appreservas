@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <p><a href="{{ route('admin.airline.create') }}" class="btn btn-primary">Añadir Aerolínea</a></p>
-                    <p><a href="{{ route('admin/dashboard') }}" class="btn btn-primary">Gestionar Ofertas</a></p>
+                    <p><a href="{{ route('admin.offers.index') }}" class="btn btn-primary">Gestionar Ofertas</a></p>
                     <p><a href="{{ route('admin.flights.create') }}" class="btn btn-primary">Añadir Vuelos</a></p>
                     <p><a href="{{ route('admin.routes.create') }}" class="btn btn-primary">Añadir Rutas</a></p>
                     <p><a href="" class="btn btn-primary">Ver informacion de reservas</a></p>

@@ -9,6 +9,7 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\OfferController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +56,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/airlines/{id}/edit', [AirlineController::class, 'edit'])->name('admin.airline.edit');
     Route::put('admin/airlines/{id}', [AirlineController::class, 'update'])->name('admin.airline.update');
     Route::delete('admin/airlines/{id}', [AirlineController::class, 'destroy'])->name('admin.airline.destroy');
+
+    Route::get('admin/offers', [OfferController::class, 'index'])->name('admin.offers.index');
+    Route::get('admin/offers/create', [OfferController::class, 'create'])->name('admin.offers.create');
+    Route::post('admin/offers', [OfferController::class, 'store'])->name('admin.offers.store');
+    Route::get('admin/offers/{id}/edit', [OfferController::class, 'edit'])->name('admin.offers.edit');
+    Route::put('admin/offers/{id}', [OfferController::class, 'update'])->name('admin.offers.update');
+    Route::delete('admin/offers/{id}', [OfferController::class, 'destroy'])->name('admin.offers.destroy');
 });
 require __DIR__.'/auth.php';
 

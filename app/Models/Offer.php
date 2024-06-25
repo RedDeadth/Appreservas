@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Offer extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'titulo',
+        'descripcion',
+        'flight_id',
+        'start_date',
+        'end_date',
+    ];
+
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class);
+    }
 }
