@@ -5,7 +5,7 @@ use App\Http\Controllers\FlightController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentMethodController;
@@ -44,6 +44,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('admin/flights/{flight}', [FlightController::class, 'update'])->name('admin.flights.update');  // Actualizar vuelo
     Route::delete('admin/flights/{flight}', [FlightController::class, 'destroy'])->name('admin.flights.destroy');
 
+    Route::get('admin/routes/create', [RouteController::class, 'create'])->name('admin.routes.create');
+    Route::post('admin/routes', [RouteController::class, 'store'])->name('admin.routes.store');
+    Route::get('admin/routes/{id}/edit', [RouteController::class, 'edit'])->name('admin.routes.edit');
+    Route::put('admin/routes/{id}', [RouteController::class, 'update'])->name('admin.routes.update');
+    Route::delete('admin/routes/{id}', [RouteController::class, 'destroy'])->name('admin.routes.destroy');
     
     Route::get('admin/airlines/create', [AirlineController::class, 'create'])->name('admin.airline.create');
     Route::post('admin/airlines', [AirlineController::class, 'store'])->name('airline.store');

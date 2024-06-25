@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use App\Models\Airline;
 use App\Models\Reservation;
+use App\Models\Route;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +14,7 @@ class HomeController extends Controller
     {
         $flights = Flight::with('airline', 'route')->get();
         $airlines = Airline::all();
+        $routes = Route::all();
 
         // Iterar sobre cada vuelo para calcular los asientos disponibles y la duración del vuelo
         $flights->each(function ($flight) {
@@ -49,6 +51,6 @@ class HomeController extends Controller
             $flight->available_seats = max(0, $availableSeats); // Evitar asientos negativos
         });
 
-        return view('admin.dashboard', compact('flights', 'airlines'));
+        return view('admin.dashboard', compact('flights', 'airlines', 'routes'));
     }
 }

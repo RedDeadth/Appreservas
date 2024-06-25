@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Gestionar Aerolíneas y Vuelos') }}
+            {{ __('Gestionar Aerolíneas, Vuelos y Rutas') }}
         </h2>
     </x-slot>
 
@@ -12,16 +12,39 @@
                     <p><a href="{{ route('admin.airline.create') }}" class="btn btn-primary">Añadir Aerolínea</a></p>
                     <p><a href="{{ route('admin/dashboard') }}" class="btn btn-primary">Gestionar Ofertas</a></p>
                     <p><a href="{{ route('admin.flights.create') }}" class="btn btn-primary">Añadir Vuelos</a></p>
+                    <p><a href="{{ route('admin.routes.create') }}" class="btn btn-primary">Añadir Rutas</a></p>
+                    <p><a href="" class="btn btn-primary">Ver informacion de reservas</a></p>
+                    <h3 class="text-lg font-semibold mb-2">Listado de Rutas</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {{-- Iterar sobre las rutas --}}
+                        @foreach ($routes as $route)
+                            <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
+                                <h4 class="text-lg font-semibold mb-2">{{ $route->origin }} - {{ $route->destination }}</h4>
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('admin.routes.edit', $route->id) }}" class="btn btn-primary">Editar</a>
+                                    <form action="{{ route('admin.routes.destroy', $route->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @if ($routes->isEmpty())
+                        <p class="mt-4 text-gray-500 dark:text-gray-400">No hay rutas registradas.</p>
+                    @endif
                 </div>
 
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-semibold mb-2">Listado de Aerolíneas</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {{-- Iterar sobre las aerolíneas --}}
                         @foreach ($airlines as $airline)
                             <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
                                 <h4 class="text-lg font-semibold mb-2">{{ $airline->name }}</h4>
                                 <div class="flex space-x-2">
-                                <a href="{{ route('admin.airline.edit', $airline->id) }}" class="btn btn-primary">Editar</a>
+                                    <a href="{{ route('admin.airline.edit', $airline->id) }}" class="btn btn-primary">Editar</a>
                                     <form action="{{ route('admin.airline.destroy', $airline->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
@@ -39,6 +62,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-semibold mb-2">Listado de Vuelos</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {{-- Iterar sobre los vuelos --}}
                         @foreach ($flights as $flight)
                             <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
                                 <h4 class="text-lg font-semibold mb-2">ID: {{ $flight->id }}</h4>
