@@ -50,7 +50,7 @@ class HomeController extends Controller
             $flight->available_seats = max(0, $availableSeats); // Evitar asientos negativos
         });
 
-        return view('admin.dashboard', compact('flights'));
+        return view('admin.dashboard', compact('flights', 'airlines'));
     }
 
     public function create()
@@ -76,7 +76,7 @@ class HomeController extends Controller
             ->with('success', 'Vuelo creado correctamente.');
     }
 
-    
+
     public function edit($id)
     {
         $flight = Flight::findOrFail($id);

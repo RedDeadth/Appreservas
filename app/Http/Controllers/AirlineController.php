@@ -1,19 +1,23 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Airline;
 use Illuminate\Http\Request;
+use App\Models\Flight;
 
 class AirlineController extends Controller
 {
     public function index()
     {
         $airlines = Airline::all();
-        return view('admin.airline.index', compact('airlines'));
+        $flights = Flight::with('airline', 'route')->get();
+        return view('admin/dashboard', compact('airlines'));
     }
 
     public function create()
     {
+        $airlines = Airline::all();
         return view('admin.airline.create');
     }
 
@@ -25,32 +29,37 @@ class AirlineController extends Controller
 
         Airline::create($request->all());
 
-        return redirect()->route('admin.airlines.index')
+        return redirect()->route('admin/dashboard')
             ->with('success', 'Aerolínea creada correctamente.');
     }
 
-    public function edit(Airline $airline)
+    public function edit($id)
     {
+        $airline = Airline::findOrFail($id);
         return view('admin.airline.edit', compact('airline'));
     }
 
-    public function update(Request $request, Airline $airline)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
         ]);
 
+        $airline = Airline::findOrFail($id);
         $airline->update($request->all());
+        $airline->save();
 
-        return redirect()->route('admin.airlines.index')
+        return redirect()->route('admin/dashboard')
             ->with('success', 'Aerolínea actualizada correctamente.');
     }
 
-    public function destroy(Airline $airline)
+    public function destroy($id)
     {
+        $airline = Airline::findOrFail($id);
         $airline->delete();
 
-        return redirect()->route('admin.airlines.index')
-            ->with('success', 'Aerolínea eliminada correctamente.');
+    return redirect()->route('admin/dashboard')
+        ->with('success', 'Aerolínea eliminada correctamente.');
     }
+
 }

@@ -44,6 +44,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('admin/flights/{flight}', [HomeController::class, 'update'])->name('admin.flights.update');  // Actualizar vuelo
     Route::delete('admin/flights/{flight}', [HomeController::class, 'destroy'])->name('admin.flights.destroy');
 
+    
+    Route::get('admin/airlines/create', [AirlineController::class, 'create'])->name('admin.airline.create');
+    Route::post('admin/airlines', [AirlineController::class, 'store'])->name('airline.store');
+    Route::get('admin/airlines/{id}/edit', [AirlineController::class, 'edit'])->name('admin.airline.edit');
+    Route::put('admin/airlines/{id}', [AirlineController::class, 'update'])->name('admin.airline.update');
+    Route::delete('admin/airlines/{id}', [AirlineController::class, 'destroy'])->name('admin.airline.destroy');
 });
 require __DIR__.'/auth.php';
 
