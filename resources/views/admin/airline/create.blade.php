@@ -18,7 +18,7 @@
                        
                         <div class="mb-4">
                             <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a href="" class="btn btn-secondary">Cancelar</a>
+                            <a href="{{ route('admin/dashboard') }}" class="btn btn-secondary">Cancelar</a>
                         </div>
                     </form>
                 </div>
