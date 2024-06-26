@@ -13,9 +13,6 @@ class AdminSearchController extends Controller
     {
         $query = $request->input('query');
 
-        // Buscar destinos
-        $destinations = Destination::where('name', 'like', '%' . $query . '%')->get();
-
         // Buscar aerolíneas
         $airlines = Airline::where('name', 'like', '%' . $query . '%')->get();
 
