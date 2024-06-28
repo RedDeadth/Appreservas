@@ -24,6 +24,10 @@
                                         <p class="card-text">Aerolínea: {{ $flight->airline->name }}</p>
                                         <p class="card-text">Duración del vuelo: {{ $flight->duration }}</p>
                                         <p class="card-text">Asientos Disponibles: {{ $flight->available_seats }}</p>
+                                        <p class="card-text">Precio: ${{ number_format($flight->price, 2) }}</p>
+                                        @if($flight->price_with_offers < $flight->price)
+                                            <p class="card-text text-success">Precio con ofertas: ${{ number_format($flight->price_with_offers, 2) }}</p>
+                                        @endif
                                         <a href="{{ route('reservations.create', $flight->id) }}" class="btn btn-danger w-full">Reservar</a>
                                     </div>
                                 </div>

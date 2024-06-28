@@ -25,6 +25,7 @@ class OfferController extends Controller
         $request->validate([
             'titulo' => 'required|string|max:255',
             'descripcion' => 'required|string',
+            'discount_percentage' => 'required|numeric|min:0|max:100',
             'flight_id' => 'required|exists:flights,id',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',

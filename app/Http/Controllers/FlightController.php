@@ -110,4 +110,11 @@ class FlightController extends Controller
         return redirect()->route('admin/dashboard')
             ->with('success', 'Vuelo eliminado correctamente.');
     }
+    public function show($id)
+    {
+        $flight = Flight::findOrFail($id);
+        $discountedPrice = $flight->getDiscountedPrice();
+
+        return view('flights.show', compact('flight', 'discountedPrice'));
+    }
 }

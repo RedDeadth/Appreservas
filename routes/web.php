@@ -10,7 +10,6 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\OfferController;
-use App\Http\Controllers\AdminSearchController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,8 +38,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin/dashboard');
-
-    Route::get('/admin/search', [AdminSearchController::class, 'index'])->name('admin.search');
     
     Route::get('admin/flights/create', [FlightController::class, 'create'])->name('admin.flights.create');   // Formulario para crear vuelo
     Route::post('admin/flights', [FlightController::class, 'store'])->name('admin.flights.store');      // Guardar vuelo

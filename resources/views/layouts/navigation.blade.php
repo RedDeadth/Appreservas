@@ -4,7 +4,10 @@
         <div class="flex justify-between h-16">
 
             <!-- AQUI IRA LA BARRA DE BUSQUEDA -->
+
             
+
+            <!-- AQUI TERMINA LA BARRA DE BUSQUEDA -->
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">

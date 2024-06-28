@@ -66,13 +66,14 @@
                         {{-- Iterar sobre los vuelos --}}
                         @foreach ($flights as $flight)
                             <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
-                                <h4 class="text-lg font-semibold mb-2">ID: {{ $flight->id }}</h4>
+                                <h4 class="text-lg font-semibold mb-2">Codigo de Vuelo: {{ $flight->id }}</h4>
                                 <p class="mb-2"><strong>Aerolínea:</strong> {{ $flight->airline->name }}</p>
                                 <p class="mb-2"><strong>Ruta:</strong> {{ $flight->route->origin }} - {{ $flight->route->destination }}</p>
                                 <p class="mb-2"><strong>Salida:</strong> {{ $flight->departure_date_time }}</p>
                                 <p class="mb-2"><strong>Llegada:</strong> {{ $flight->arrival_date_time }}</p>
                                 <p class="mb-2"><strong>Duración:</strong> {{ $flight->duration }} horas</p>
                                 <p class="mb-2"><strong>Asientos Disponibles:</strong> {{ $flight->available_seats }}</p>
+                                <p class="mb-2"><strong>Precio del Ticket:</strong> S/.{{ $flight->price }}</p>
                                 <div class="flex space-x-2">
                                     <a href="{{ route('admin.flights.edit', $flight->id) }}" class="btn btn-primary">Editar</a>
                                     <form action="{{ route('admin.flights.destroy', $flight->id) }}" method="POST" class="inline">

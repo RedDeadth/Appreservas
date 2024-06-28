@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descripcion');
             $table->foreignId('flight_id')->constrained();
+            $table->integer('discount_percentage');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->timestamps();

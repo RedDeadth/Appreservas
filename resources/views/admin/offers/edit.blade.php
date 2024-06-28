@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('offers.update', $offer->id) }}" method="POST">
+                    <form action="{{ route('admin.offers.update', $offer->id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="mb-4">
@@ -38,7 +38,7 @@
                         </div>
                         <div class="mt-4">
                             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Actualizar Oferta</button>
-                            <a href="{{ route('offers.index') }}" class="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Cancelar</a>
+                            <a href="{{ route('admin.offers.index') }}" class="ml-2 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">Cancelar</a>
                         </div>
                     </form>
                 </div>

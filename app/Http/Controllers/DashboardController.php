@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\Offer;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         // Obtener todos los vuelos con relaciones cargadas
-        $flights = Flight::with('airline', 'route')->get();
+        $flights = Flight::with('airline', 'route', 'offers')->get();
 
         // Iterar sobre cada vuelo para calcular los asientos disponibles y la duración del vuelo
         $flights->each(function ($flight) {

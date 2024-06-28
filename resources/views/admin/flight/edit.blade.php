@@ -63,6 +63,15 @@
                                     @enderror
                                 </div>
 
+                                <div class="mb-4">
+                                    <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Precio</label>
+                                    <input type="float" name="price" id="price" class="mt-1 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-indigo-300 dark:focus:border-indigo-300 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500 rounded-md shadow-sm" value="{{ old('price', $flight->price) }}" placeholder="Ingrese el precio del vuelo">
+                                    @error('price')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+
                                 <div class="mt-6">
                                     <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                         Actualizar Vuelo

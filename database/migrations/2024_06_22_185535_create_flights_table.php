@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('route_id')->constrained()->onDelete('cascade');
             $table->dateTime('departure_date_time');
             $table->dateTime('arrival_date_time');
-         
             $table->integer('available_seats');
+            $table->float('price');
             $table->timestamps();
         });
     }

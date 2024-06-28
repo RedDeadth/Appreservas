@@ -12,9 +12,12 @@ class Offer extends Model
     protected $fillable = [
         'titulo',
         'descripcion',
+        
         'flight_id',
+        
         'start_date',
         'end_date',
+        'discount_percentage',
     ];
 
     public function flight()

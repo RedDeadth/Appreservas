@@ -19,6 +19,10 @@
                             <label for="descripcion" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
                             <textarea name="descripcion" id="descripcion" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                         </div>
+                        <div>
+                            <label for="discount_percentage">Descuento (%):</label>
+                            <input type="number" name="discount_percentage" id="discount_percentage">
+                        </div>
                         <div class="mb-4">
                             <label for="flight_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Vuelo</label>
                             <select name="flight_id" id="flight_id" class="mt-1 block w-full py-2 px-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
