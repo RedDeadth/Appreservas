@@ -100,4 +100,9 @@ class ReservationController extends Controller
         $reservations = auth()->user()->reservations()->with('flight.route', 'flight.airline')->get();
         return view('reservations.Myindex', compact('reservations'));
     }
+    public function index()
+    {
+        $reservations = Reservation::with('flight.route', 'flight.airline', 'user')->get();
+        return view('admin.reservations.index', compact('reservations'));
+    }
 }

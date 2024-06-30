@@ -24,6 +24,7 @@
                                             <p class="mb-0"><strong>Número de Asiento:</strong> {{ $reservation->seat_number }}</p>
                                             <p class="mb-0"><strong>Estado:</strong> {{ ucfirst($reservation->status) }}</p>
                                             <p class="mb-0"><strong>Fecha de Reserva:</strong> {{ $reservation->created_at->format('d-m-Y H:i') }}</p>
+                                            <p class="mb-2"><strong>Método de Pago:</strong> {{ $reservation->paymentMethod->Name ?? 'N/A' }}</p>
                                             <div class="mt-2">
                                                 <a href="{{ route('reservations.edit', $reservation->id) }}" class="btn btn-warning">Editar</a>
                                                 <form action="{{ route('reservations.destroy', $reservation->id) }}" method="POST" class="d-inline">

@@ -67,6 +67,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/offers/{id}/edit', [OfferController::class, 'edit'])->name('admin.offers.edit');
     Route::put('admin/offers/{id}', [OfferController::class, 'update'])->name('admin.offers.update');
     Route::delete('admin/offers/{id}', [OfferController::class, 'destroy'])->name('admin.offers.destroy');
+
+    Route::get('admin/reservations', [ReservationController::class, 'index'])->name('admin.reservations.index');
 });
 require __DIR__.'/auth.php';
 
