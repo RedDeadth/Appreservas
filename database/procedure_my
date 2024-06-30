@@ -1,0 +1,18 @@
+DELIMITER //
+CREATE PROCEDURE searchFlightsAndAirlines(IN searchTerm VARCHAR(255))
+BEGIN
+    SELECT 
+        f.id AS flight_id, 
+        a.name AS airline_name, 
+        r.origin, 
+        r.destination, 
+        f.price
+    FROM flights f
+    JOIN airlines a ON f.airline_id = a.id
+    JOIN routes r ON f.route_id = r.id
+    WHERE r.origin LIKE CONCAT('%', searchTerm, '%')
+    OR r.destination LIKE CONCAT('%', searchTerm, '%')
+    OR a.name LIKE CONCAT('%', searchTerm, '%')
+    ORDER BY f.price ASC;
+END //
+DELIMITER ;

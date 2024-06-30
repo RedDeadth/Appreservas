@@ -5,7 +5,10 @@
 
             <!-- AQUI IRA LA BARRA DE BUSQUEDA -->
 
-            
+            <form action="{{ route('search') }}" method="GET" class="flex">
+                <input type="text" name="search" placeholder="Buscar destinos o aerolíneas..." class="form-control">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
 
             <!-- AQUI TERMINA LA BARRA DE BUSQUEDA -->
             <div class="flex">
