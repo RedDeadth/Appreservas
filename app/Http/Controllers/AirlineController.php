@@ -18,13 +18,13 @@ class AirlineController extends Controller
     public function create()
     {
         $airlines = Airline::all();
-        return view('admin.airline.create');
+        return view('admin.airlines.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|unique:airlines,name'
         ]);
 
         Airline::create($request->all());
@@ -36,7 +36,7 @@ class AirlineController extends Controller
     public function edit($id)
     {
         $airline = Airline::findOrFail($id);
-        return view('admin.airline.edit', compact('airline'));
+        return view('admin.airlines.edit', compact('airline'));
     }
 
     public function update(Request $request, $id)

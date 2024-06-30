@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name');
-            $table->string('card_number');
-      
-            $table->string('type');
+            $table->enum('type_of_method', ['Efectivo', 'Tarjeta de Credito'])->default('Efectivo');
+            $table->string('Name');
+            $table->integer('Code');
+            
             $table->timestamps();
         });
     }

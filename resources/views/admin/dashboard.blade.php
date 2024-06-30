@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100 flex flex-wrap gap-4">
-                    <p><a href="{{ route('admin.airline.create') }}" class="btn btn-primary">Añadir Aerolínea</a></p>
+                    <p><a href="{{ route('admin.airlines.create') }}" class="btn btn-primary">Añadir Aerolínea</a></p>
                     <p><a href="{{ route('admin.offers.index') }}" class="btn btn-primary">Gestionar Ofertas</a></p>
                     <p><a href="{{ route('admin.flights.create') }}" class="btn btn-primary">Añadir Vuelos</a></p>
                     <p><a href="{{ route('admin.routes.create') }}" class="btn btn-primary">Añadir Rutas</a></p>
@@ -45,8 +45,8 @@
                             <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg">
                                 <h4 class="text-lg font-semibold mb-2">{{ $airline->name }}</h4>
                                 <div class="flex space-x-2">
-                                    <a href="{{ route('admin.airline.edit', $airline->id) }}" class="btn btn-primary">Editar</a>
-                                    <form action="{{ route('admin.airline.destroy', $airline->id) }}" method="POST" class="inline">
+                                    <a href="{{ route('admin.airlines.edit', $airline->id) }}" class="btn btn-primary">Editar</a>
+                                    <form action="{{ route('admin.airlines.destroy', $airline->id) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -73,7 +73,7 @@
                                 <p class="mb-2"><strong>Llegada:</strong> {{ $flight->arrival_date_time }}</p>
                                 <p class="mb-2"><strong>Duración:</strong> {{ $flight->duration }} horas</p>
                                 <p class="mb-2"><strong>Asientos Disponibles:</strong> {{ $flight->available_seats }}</p>
-                                <p class="mb-2"><strong>Precio del Ticket:</strong> S/.{{ $flight->price }}</p>
+                                <p class="mb-2"><strong>Precio del Ticket sin Ofertas:</strong> S/.{{ $flight->price }}</p>
                                 <div class="flex space-x-2">
                                     <a href="{{ route('admin.flights.edit', $flight->id) }}" class="btn btn-primary">Editar</a>
                                     <form action="{{ route('admin.flights.destroy', $flight->id) }}" method="POST" class="inline">

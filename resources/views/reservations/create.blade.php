@@ -51,7 +51,6 @@
                             <select name="status" class="form-control" required>
                                 <option value="pending">Pendiente</option>
                                 <option value="confirmed">Confirmar</option>
-                                <option value="canceled">Cancelado</option>
                             </select>
                             @error('status')
                                 <span class="text-danger">{{ $message }}</span>
@@ -63,7 +62,7 @@
                             <select name="payment_method_id" class="form-control">
                                 <option value="">Seleccione un método de pago</option>
                                 @foreach($paymentMethods as $method)
-                                    <option value="{{ $method->id }}">{{ $method->name }} - {{ $method->card_number }}</option>
+                                    <option value="{{ $method->id }}">{{ $method->Name }} - {{ $method->type_of_method }}</option>
                                 @endforeach
                             </select>
                             @error('payment_method_id')

@@ -3,13 +3,15 @@
 use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\FlightController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\UserController;
+
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +20,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/search-flights', [FlightController::class, 'search'])->name('flights.search');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -28,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reservations/{id}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
     Route::put('/reservations/{id}', [ReservationController::class, 'update'])->name('reservations.update');
     Route::delete('/reservations/{id}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
-    Route::get('/my-flights', [ReservationController::class, 'myReservations'])->name('my-flights.index');
+    Route::get('/reservations/Myindex', [ReservationController::class, 'Myreservations'])->name('Myreservations.index');
 
     Route::get('/payment-methods', [PaymentMethodController::class, 'index'])->name('payment-methods.index');
     Route::get('/payment-methods/create', [PaymentMethodController::class, 'create'])->name('payment-methods.create');
@@ -51,11 +55,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('admin/routes/{id}', [RouteController::class, 'update'])->name('admin.routes.update');
     Route::delete('admin/routes/{id}', [RouteController::class, 'destroy'])->name('admin.routes.destroy');
     
-    Route::get('admin/airlines/create', [AirlineController::class, 'create'])->name('admin.airline.create');
-    Route::post('admin/airlines', [AirlineController::class, 'store'])->name('airline.store');
-    Route::get('admin/airlines/{id}/edit', [AirlineController::class, 'edit'])->name('admin.airline.edit');
-    Route::put('admin/airlines/{id}', [AirlineController::class, 'update'])->name('admin.airline.update');
-    Route::delete('admin/airlines/{id}', [AirlineController::class, 'destroy'])->name('admin.airline.destroy');
+    Route::get('admin/airlines/create', [AirlineController::class, 'create'])->name('admin.airlines.create');
+    Route::post('admin/airlines', [AirlineController::class, 'store'])->name('airlines.store');
+    Route::get('admin/airlines/{id}/edit', [AirlineController::class, 'edit'])->name('admin.airlines.edit');
+    Route::put('admin/airlines/{id}', [AirlineController::class, 'update'])->name('admin.airlines.update');
+    Route::delete('admin/airlines/{id}', [AirlineController::class, 'destroy'])->name('admin.airlines.destroy');
 
     Route::get('admin/offers', [OfferController::class, 'index'])->name('admin.offers.index');
     Route::get('admin/offers/create', [OfferController::class, 'create'])->name('admin.offers.create');

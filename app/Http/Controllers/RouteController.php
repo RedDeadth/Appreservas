@@ -47,8 +47,8 @@ class RouteController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'origin' => 'required|string',
-            'destination' => 'required|string',
+            'origin' => 'required|string|max:128',
+            'destination' => 'required|string|max;128',
             // Agrega más validaciones según sea necesario
         ]);
 

@@ -9,11 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('airline.store') }}">
+                    <form method="POST" action="{{ route('airlines.store') }}">
                         @csrf
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
                             <input type="text" name="name" id="name" class="mt-1 block w-full" required>
+                            @error('name')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
                         </div>
                        
                         <div class="mb-4">

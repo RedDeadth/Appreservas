@@ -32,10 +32,10 @@
                             @forelse ($paymentMethods as $paymentMethod)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $paymentMethod->name }}</td>
-                                    <td>{{ $paymentMethod->card_number }}</td>
+                                    <td>{{ $paymentMethod->Name }}</td>
+                                    <td>{{ $paymentMethod->Code }}</td>
                                     
-                                    <td>{{ $paymentMethod->type }}</td>
+                                    <td>{{ $paymentMethod->type_of_method }}</td>
                                     <td>
                                         <form action="{{ route('payment-methods.destroy', $paymentMethod->id) }}" method="POST">
                                             @csrf
@@ -46,7 +46,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="6" class="text-center">No se encontraron métodos de pago.</td>
+                                    <td colspan="5" class="text-center">No se encontraron métodos de pago.</td>
                                 </tr>
                             @endforelse
                         </tbody>

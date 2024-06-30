@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Vuelos disponibles') }}
             </h2>
-        <form action="{{ route('admin.airline.update', $airline->id) }}" method="POST">
+        <form action="{{ route('admin.airlines.update', $airline->id) }}" method="POST">
         @csrf
         @method('PUT')
             <div class="form-group">

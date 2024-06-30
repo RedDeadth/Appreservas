@@ -50,13 +50,6 @@ class ReservationController extends Controller
         session()->flash('success', 'Reserva creada con éxito');
         return redirect()->route('dashboard');
     }
-    public function myReservations()
-    {
-        $user = auth()->user();
-        $reservations = Reservation::where('user_id', $user->id)->with('flight')->get();
-
-        return view('reservations.my_reservations', compact('reservations'));
-    }
     public function edit($id)
     {
         $reservation = Reservation::findOrFail($id);
@@ -89,7 +82,7 @@ class ReservationController extends Controller
         ]);
 
         session()->flash('success', 'Reserva actualizada con éxito');
-        return redirect()->route('my-flights.index');
+        return redirect()->route('Myreservations.index');
     }
 
     // Método para eliminar una reserva
@@ -99,12 +92,12 @@ class ReservationController extends Controller
         $reservation->delete();
 
         session()->flash('success', 'Reserva eliminada con éxito');
-        return redirect()->route('my-flights.index');
+        return redirect()->route('Myreservations.index');
     }
 
-    public function index()
+    public function Myreservations()
     {
         $reservations = auth()->user()->reservations()->with('flight.route', 'flight.airline')->get();
-        return view('my-flights.index', compact('reservations'));
+        return view('reservations.Myindex', compact('reservations'));
     }
 }

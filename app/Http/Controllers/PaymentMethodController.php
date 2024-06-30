@@ -22,13 +22,16 @@ class PaymentMethodController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'card_number' => 'required|string|max:16',
-            
-            'type' => 'required|string|max:255',
+            'Name' => 'required|string|max:255',
+            'Code' => 'required|string|max:20',
+            'type_of_method' => 'required|string|max:255',
         ]);
 
-        Auth::user()->paymentMethods()->create($request->all());
+        Auth::user()->paymentMethods()->create([
+            'Name' => $request->input('Name'),
+            'Code' => $request->input('Code'),
+            'type_of_method' => $request->input('type_of_method')
+        ]);
 
         return redirect()->route('payment-methods.index')->with('success', 'Método de pago añadido exitosamente.');
     }

@@ -14,9 +14,11 @@
                         <thead>
                             <tr>
                                 <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Título</th>
-                                <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Vuelo</th>
+                                <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Codigo de Vuelo</th>
+                                <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Oferta</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Inicio</th>
                                 <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700 text-left leading-4 text-blue-500 dark:text-blue-400 tracking-wider">Fin</th>
+                                
                                 <th class="px-6 py-3 border-b-2 border-gray-300 dark:border-gray-700"></th>
                             </tr>
                         </thead>
@@ -25,6 +27,7 @@
                                 <tr>
                                     <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">{{ $offer->titulo }}</td>
                                     <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">{{ $offer->flight->id }}</td>
+                                    <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">{{ $offer->discount_percentage }}%</td>
                                     <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">{{ $offer->start_date }}</td>
                                     <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">{{ $offer->end_date }}</td>
                                     <td class="px-6 py-4 border-b border-gray-300 dark:border-gray-700">

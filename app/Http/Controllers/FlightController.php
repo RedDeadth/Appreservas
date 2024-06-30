@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Airline;
 use App\Models\Route;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\DB;
 
 class FlightController extends Controller
 {
@@ -57,7 +58,7 @@ class FlightController extends Controller
     {
         $airlines = Airline::all();
         $routes = Route::all();
-        return view('admin.flight.create', compact('airlines', 'routes'));
+        return view('admin.flights.create', compact('airlines', 'routes'));
     }
 
     public function store(Request $request)
@@ -67,7 +68,9 @@ class FlightController extends Controller
             'route_id' => 'required|exists:routes,id',
             'departure_date_time' => 'required|date',
             'arrival_date_time' => 'required|date|after:departure_date_time',
+            
             'available_seats' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
         ]);
 
         Flight::create($request->all());
@@ -82,7 +85,7 @@ class FlightController extends Controller
         $airlines = Airline::all(); // Obtén todas las aerolíneas
         $routes = Route::all();     // Obtén todas las rutas
 
-        return view('admin.flight.edit', compact('flight', 'airlines', 'routes'));
+        return view('admin.flights.edit', compact('flight', 'airlines', 'routes'));
     }
 
     public function update(Request $request, $id)
@@ -93,6 +96,7 @@ class FlightController extends Controller
             'departure_date_time' => 'required|date',
             'arrival_date_time' => 'required|date|after:departure_date_time',
             'available_seats' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
         ]);
 
         $flight = Flight::findOrFail($id);
@@ -117,4 +121,5 @@ class FlightController extends Controller
 
         return view('flights.show', compact('flight', 'discountedPrice'));
     }
+    
 }

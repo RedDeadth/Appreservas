@@ -65,7 +65,7 @@
 
                                 <div class="mb-4">
                                     <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Precio</label>
-                                    <input type="float" name="price" id="price" class="mt-1 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-indigo-300 dark:focus:border-indigo-300 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500 rounded-md shadow-sm" value="{{ old('price', $flight->price) }}" placeholder="Ingrese el precio del vuelo">
+                                    <input type="numeric" name="price" id="price" class="mt-1 block w-full border-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-indigo-300 dark:focus:border-indigo-300 focus:ring focus:ring-indigo-200 dark:focus:ring-indigo-500 rounded-md shadow-sm" value="{{ old('price', $flight->price) }}" placeholder="Ingrese el precio del vuelo">
                                     @error('price')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror

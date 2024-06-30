@@ -19,30 +19,33 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="name" class="form-label">Nombre del Método de Pago</label>
-                            <input type="text" name="name" class="form-control" required>
-                            @error('name')
+                            <label for="type_of_method" class="form-label">Tipo de Método de Pago</label>
+                            <select name="type_of_method" class="form-control" required>
+                                <option value="Efectivo" {{ old('type_of_method') == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                                <option value="Tarjeta de Credito" {{ old('type_of_method') == 'Tarjeta de Credito' ? 'selected' : '' }}>Tarjeta de Crédito</option>
+                            </select>
+                            @error('type_of_method')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="card_number" class="form-label">Número de Tarjeta</label>
-                            <input type="text" name="card_number" class="form-control" maxlength="16" required>
-                            @error('card_number')
+                            <label for="Name" class="form-label">Nombre del Método de Pago</label>
+                            <input type="text" name="Name" class="form-control" value="{{ old('Name') }}" required>
+                            @error('Name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Code" class="form-label">Código del Método de Pago</label>
+                            <input type="text" name="Code" class="form-control" value="{{ old('Code') }}" required>
+                            @error('Code')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
 
                         
-
-                        <div class="mb-3">
-                            <label for="type" class="form-label">Tipo de Tarjeta</label>
-                            <input type="text" name="type" class="form-control" required>
-                            @error('type')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
 
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn btn-primary w-full">Añadir Método de Pago</button>
