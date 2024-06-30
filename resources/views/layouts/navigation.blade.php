@@ -2,15 +2,6 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-
-            <!-- AQUI IRA LA BARRA DE BUSQUEDA -->
-
-            <form action="{{ route('search') }}" method="GET" class="flex">
-                <input type="text" name="search" placeholder="Buscar destinos o aerolíneas..." class="form-control">
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
-
-            <!-- AQUI TERMINA LA BARRA DE BUSQUEDA -->
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
@@ -19,8 +10,13 @@
                     </a>
                 </div>
 
-                
-
+                <!-- Search Bar -->
+                <div class="flex items-center">
+                    <form action="{{ Auth::user()->isAdmin() ? route('admin.search.index') : route('search.index') }}" method="GET">
+                        <input type="text" name="search" placeholder="Buscar..." class="px-2 py-1 border border-gray-300 rounded-md">
+                        <button type="submit" class="ml-2 px-4 py-1 bg-blue-500 text-white rounded-md">Buscar</button>
+                    </form>
+                </div>
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

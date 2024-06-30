@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/search', [SearchController::class, 'search'])->name('search');
+    Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,7 +43,9 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [HomeController::class, 'index'])->name('admin/dashboard');
-    
+
+    Route::get('/admin/search', [\App\Http\Controllers\AdminSearchController::class, 'search'])->name('admin.search.index')->middleware(['admin']);
+
     Route::get('admin/flights/create', [FlightController::class, 'create'])->name('admin.flights.create');   // Formulario para crear vuelo
     Route::post('admin/flights', [FlightController::class, 'store'])->name('admin.flights.store');      // Guardar vuelo
     Route::get('admin/flights/{flight}/edit', [FlightController::class, 'edit'])->name('admin.flights.edit');    // Formulario para editar vuelo
@@ -72,5 +74,3 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/reservations', [ReservationController::class, 'index'])->name('admin.reservations.index');
 });
 require __DIR__.'/auth.php';
-
-//Route::get('admin/dashboard', [HomeController::class,'index'])->middleware(['auth', 'admin']);

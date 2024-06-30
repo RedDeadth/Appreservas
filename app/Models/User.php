@@ -52,4 +52,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(PaymentMethod::class);
     }
+    public function isAdmin()
+    {
+        return $this->usertype === 'admin';
+    }
 }

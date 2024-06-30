@@ -9,12 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Admin
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->usertype !="admin") {
-        return redirect("dashboard");
+        if (Auth::check() && Auth::user()->usertype === 'admin') {
+            return $next($request);
         }
-        
-        return $next($request);
+
+        return redirect('/dashboard'); // Cambia '/dashboard' por la ruta a la que deseas redirigir
     }
 }
