@@ -1,3 +1,5 @@
+BUSCADOR DE USUARIO
+
 DELIMITER //
 CREATE PROCEDURE searchFlightsAndAirlines(IN searchTerm VARCHAR(255))
 BEGIN
@@ -12,73 +14,33 @@ BEGIN
 END
 DELIMITER ;
 
+BUSCADOR DE ADMINISTRADOR
+
 DELIMITER //
 
 CREATE PROCEDURE getUserReservationsByName(searchTerm VARCHAR(255))
+
 BEGIN
+    DECLARE search_term_utf8mb4_unicode_ci VARCHAR(255);
+    SET search_term_utf8mb4_unicode_ci = CONCAT('%', searchTerm, '%') COLLATE utf8mb4_unicode_ci;
+
     SELECT 
-        r.id AS reservation_id,
         u.name AS user_name,
         f.id AS flight_id,
         a.name AS airline_name,
         r.origin,
         r.destination,
         f.price
-    FROM reservations r
-    JOIN users u ON r.user_id = u.id
-    JOIN flights f ON r.flight_id = f.id
-    JOIN airlines a ON f.airline_id = a.id
-    WHERE u.name LIKE CONCAT('%', searchTerm, '%');
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE getFlightsByAirlineName(searchTerm VARCHAR(255))
-BEGIN
-    SELECT 
-        f.id AS flight_id,
-        a.name AS airline_name,
-        r.origin,
-        r.destination,
-        f.price
-    FROM flights f
+    FROM reservations rv
+    JOIN flights f ON rv.flight_id = f.id
+    JOIN users u ON rv.user_id = u.id
     JOIN airlines a ON f.airline_id = a.id
     JOIN routes r ON f.route_id = r.id
-    WHERE a.name LIKE CONCAT('%', searchTerm, '%');
-END //
-
-DELIMITER ;
-
-DELIMITER //
-
-CREATE PROCEDURE getFlightsByDestination(searchTerm VARCHAR(255))
-BEGIN
-    SELECT 
-        f.id AS flight_id,
-        a.name AS airline_name,
-        r.origin,
-        r.destination,
-        f.price
-    FROM flights f
-    JOIN airlines a ON f.airline_id = a.id
-    JOIN routes r ON f.route_id = r.id
-    WHERE r.destination LIKE CONCAT('%', searchTerm, '%');
-END //
-
-DELIMITER ;
-
-DELIMITER //
-CREATE PROCEDURE searchFlightsAndAirlinesandUser(IN searchTerm VARCHAR(255))
-BEGIN
-    SELECT flights.*, airlines.name AS airline_name, routes.origin, routes.destination, flights.price
-    FROM flights
-    JOIN airlines ON flights.airline_id = airlines.id
-    JOIN routes ON flights.route_id = routes.id
-    WHERE routes.origin COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', searchTerm, '%')
-       OR routes.destination COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', searchTerm, '%')
-       OR airlines.name COLLATE utf8mb4_unicode_ci LIKE CONCAT('%', searchTerm, '%')
-    ORDER BY flights.price ASC;
+    WHERE r.origin COLLATE utf8mb4_unicode_ci LIKE search_term_utf8mb4_unicode_ci
+       OR r.destination COLLATE utf8mb4_unicode_ci LIKE search_term_utf8mb4_unicode_ci
+       OR a.name COLLATE utf8mb4_unicode_ci LIKE search_term_utf8mb4_unicode_ci
+       OR u.name COLLATE utf8mb4_unicode_ci LIKE search_term_utf8mb4_unicode_ci
+    ORDER BY f.price ASC;
 END
+
 DELIMITER ;
